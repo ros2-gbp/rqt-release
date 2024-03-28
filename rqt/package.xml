@@ -1,6 +1,6 @@
 <package format="2">
   <name>rqt</name>
-  <version>1.5.0</version>
+  <version>1.6.0</version>
   <description>rqt is a Qt-based framework for GUI development for ROS.</description>
 
   <maintainer email="dharini@openrobotics.org">Dharini Dutia</maintainer>
@@ -19,6 +19,8 @@
   <exec_depend version_gte="0.3.0">rqt_gui_cpp</exec_depend>
   <exec_depend version_gte="0.3.0">rqt_gui_py</exec_depend>
   <exec_depend>rqt_py_common</exec_depend>
+
+  <test_depend>python3-pytest</test_depend>
 
   <export>
     <build_type>ament_python</build_type>
