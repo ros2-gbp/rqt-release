@@ -32,8 +32,8 @@
 
 from python_qt_binding.QtCore import qWarning
 
-from rqt_py_common.message_helpers import get_message_class
 from rqt_py_common.message_tree_model import MessageTreeModel
+from rqt_py_common.message_helpers import get_message_class
 from rqt_py_common.tree_model_completer import TreeModelCompleter
 
 
@@ -95,54 +95,52 @@ if __name__ == '__main__':
         QTreeView, QVBoxLayout, QWidget
 
     import rclpy
-    from rclpy.executors import ExternalShutdownException
+    rclpy.init()
+    topic_completer_node = rclpy.create_node()
 
-    try:
-        with rclpy.init():
-            topic_completer_node = rclpy.create_node()
+    app = QApplication(sys.argv)
+    mw = QMainWindow()
+    widget = QWidget(mw)
+    layout = QVBoxLayout(widget)
 
-            app = QApplication(sys.argv)
-            mw = QMainWindow()
-            widget = QWidget(mw)
-            layout = QVBoxLayout(widget)
+    edit = QLineEdit()
+    edit_completer = TopicCompleter(edit)
+    edit_completer.update_topics(topic_completer_node)
+    # edit_completer.setCompletionMode(QCompleter.InlineCompletion)
+    edit.setCompleter(edit_completer)
 
-            edit = QLineEdit()
-            edit_completer = TopicCompleter(edit)
-            edit_completer.update_topics(topic_completer_node)
-            # edit_completer.setCompletionMode(QCompleter.InlineCompletion)
-            edit.setCompleter(edit_completer)
+    combo = QComboBox()
+    combo.setEditable(True)
+    combo_completer = TopicCompleter(combo)
+    combo_completer.update_topics(topic_completer_node)
 
-            combo = QComboBox()
-            combo.setEditable(True)
-            combo_completer = TopicCompleter(combo)
-            combo_completer.update_topics(topic_completer_node)
+    # combo_completer.setCompletionMode(QCompleter.InlineCompletion)
+    combo.lineEdit().setCompleter(combo_completer)
 
-            # combo_completer.setCompletionMode(QCompleter.InlineCompletion)
-            combo.lineEdit().setCompleter(combo_completer)
+    model_tree = QTreeView()
+    model_tree.setModel(combo_completer.model())
+    model_tree.expandAll()
+    for column in range(combo_completer.model().columnCount()):
+        model_tree.resizeColumnToContents(column)
 
-            model_tree = QTreeView()
-            model_tree.setModel(combo_completer.model())
-            model_tree.expandAll()
-            for column in range(combo_completer.model().columnCount()):
-                model_tree.resizeColumnToContents(column)
+    completion_tree = QTreeView()
+    completion_tree.setModel(combo_completer.completionModel())
+    completion_tree.expandAll()
+    for column in range(combo_completer.completionModel().columnCount()):
+        completion_tree.resizeColumnToContents(column)
 
-            completion_tree = QTreeView()
-            completion_tree.setModel(combo_completer.completionModel())
-            completion_tree.expandAll()
-            for column in range(combo_completer.completionModel().columnCount()):
-                completion_tree.resizeColumnToContents(column)
+    layout.addWidget(model_tree)
+    layout.addWidget(completion_tree)
+    layout.addWidget(edit)
+    layout.addWidget(combo)
+    layout.setStretchFactor(model_tree, 1)
+    widget.setLayout(layout)
+    mw.setCentralWidget(widget)
 
-            layout.addWidget(model_tree)
-            layout.addWidget(completion_tree)
-            layout.addWidget(edit)
-            layout.addWidget(combo)
-            layout.setStretchFactor(model_tree, 1)
-            widget.setLayout(layout)
-            mw.setCentralWidget(widget)
+    mw.move(300, 0)
+    mw.resize(800, 900)
+    mw.show()
+    app.exec_()
 
-            mw.move(300, 0)
-            mw.resize(800, 900)
-            mw.show()
-            app.exec_()
-    except (KeyboardInterrupt, ExternalShutdownException):
-        pass
+    topic_completer_node.destroy_node()
+    rclpy.shutdown()

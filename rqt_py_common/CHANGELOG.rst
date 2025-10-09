@@ -2,31 +2,7 @@
 Changelog for package rqt_py_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.9.1 (2025-10-09)
-------------------
-
-1.9.0 (2025-02-02)
-------------------
-
-1.8.0 (2024-11-20)
-------------------
-* Stop using python_cmake_module. (`#304 <https://github.com/ros-visualization/rqt/issues/304>`_)
-* Contributors: Chris Lalancette
-
-1.7.3 (2024-10-03)
-------------------
-* Use an rclpy context manager. (`#312 <https://github.com/ros-visualization/rqt/issues/312>`_)
-* Contributors: Chris Lalancette
-
-1.7.2 (2024-07-23)
-------------------
-
-1.7.1 (2024-07-10)
-------------------
-* Added common test to rqt_py_common (`#310 <https://github.com/ros-visualization/rqt/issues/310>`_)
-* Contributors: Alejandro Hernández Cordero
-
-1.7.0 (2024-04-26)
+1.6.1 (2025-10-09)
 ------------------
 
 1.6.0 (2024-03-28)

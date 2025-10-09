@@ -30,14 +30,54 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef RQT_GUI_CPP__PLUGIN_H_
-#define RQT_GUI_CPP__PLUGIN_H_
+#ifndef rqt_gui_cpp__Plugin_H
+#define rqt_gui_cpp__Plugin_H
 
-// *INDENT-OFF* (prevent uncrustify from adding indention below)
-#warning Including header <rqt_gui_cpp/plugin.h> is deprecated, \
-include <rqt_gui_cpp/plugin.hpp> instead.
+#include <qt_gui_cpp/plugin.h>
+#include <qt_gui_cpp/plugin_context.h>
+#include <qt_gui_cpp/settings.h>
 
-// *INDENT-ON*
-#include "./plugin.hpp"
+#include <rclcpp/rclcpp.hpp>
 
-#endif  // RQT_GUI_CPP__PLUGIN_H_
+namespace rqt_gui_cpp {
+
+/**
+ * The base class for C++ plugins which use the ROS client library.
+ * A plugin must not call rclcpp::init() as this is performed once by the framework.
+ */
+class Plugin
+  : public qt_gui_cpp::Plugin
+{
+
+public:
+
+  Plugin()
+    : qt_gui_cpp::Plugin()
+  {}
+
+  /**
+   * Shutdown and clean up the plugin before unloading.
+   * I.e. unregister subscribers and stop timers.
+   */
+  virtual void shutdownPlugin()
+  {}
+
+  virtual void passInNode(std::shared_ptr<rclcpp::Node> node)
+  {
+    node_ = node;
+  }
+
+protected:
+
+  rclcpp::Node::SharedPtr node_;
+
+private:
+
+  void onInit()
+  {}
+
+};
+
+} // namespace
+
+#endif // rqt_gui_cpp__Plugin_H

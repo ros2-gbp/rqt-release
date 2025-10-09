@@ -2,29 +2,7 @@
 Changelog for package rqt_gui_cpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.9.1 (2025-10-09)
-------------------
-
-1.9.0 (2025-02-02)
-------------------
-
-1.8.0 (2024-11-20)
-------------------
-
-1.7.3 (2024-10-03)
-------------------
-
-1.7.2 (2024-07-23)
-------------------
-* Added common test to rqt_gui_cpp and deprecate h headers (`#311 <https://github.com/ros-visualization/rqt/issues/311>`_)
-* Contributors: Alejandro Hernández Cordero
-
-1.7.1 (2024-07-10)
-------------------
-* Updated deprecated qt_gui_cpp headers (`#309 <https://github.com/ros-visualization/rqt/issues/309>`_)
-* Contributors: Alejandro Hernández Cordero
-
-1.7.0 (2024-04-26)
+1.6.1 (2025-10-09)
 ------------------
 
 1.6.0 (2024-03-28)
