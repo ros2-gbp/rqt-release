@@ -1,3 +1,31 @@
+## rqt (kilted) - 1.9.1-1
+
+The packages in the `rqt` repository were released into the `kilted` distro by running `/usr/bin/bloom-release --rosdistro kilted --track kilted rqt` on `Thu, 09 Oct 2025 13:59:37 -0000`
+
+These packages were released:
+- `rqt`
+- `rqt_gui`
+- `rqt_gui_cpp`
+- `rqt_gui_py`
+- `rqt_py_common`
+
+Version of package(s) in repository `rqt`:
+
+- upstream repository: https://github.com/ros-visualization/rqt.git
+- release repository: https://github.com/ros2-gbp/rqt-release.git
+- rosdistro version: `1.9.0-2`
+- old version: `1.9.0-2`
+- new version: `1.9.1-1`
+
+Versions of tools used:
+
+- bloom version: `0.13.0`
+- catkin_pkg version: `1.1.0`
+- rosdep version: `0.26.0`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## rqt (rolling) - 1.10.1-1
 
 The packages in the `rqt` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --rosdistro rolling --track rolling rqt` on `Thu, 09 Oct 2025 12:32:58 -0000`
