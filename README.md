@@ -1,3 +1,31 @@
+## rqt (humble) - 1.1.8-1
+
+The packages in the `rqt` repository were released into the `humble` distro by running `/usr/bin/bloom-release --rosdistro humble --track humble rqt` on `Thu, 09 Oct 2025 14:54:56 -0000`
+
+These packages were released:
+- `rqt`
+- `rqt_gui`
+- `rqt_gui_cpp`
+- `rqt_gui_py`
+- `rqt_py_common`
+
+Version of package(s) in repository `rqt`:
+
+- upstream repository: https://github.com/ros-visualization/rqt.git
+- release repository: https://github.com/ros2-gbp/rqt-release.git
+- rosdistro version: `1.1.7-1`
+- old version: `1.1.7-1`
+- new version: `1.1.8-1`
+
+Versions of tools used:
+
+- bloom version: `0.13.0`
+- catkin_pkg version: `1.1.0`
+- rosdep version: `0.26.0`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## rqt (jazzy) - 1.6.1-1
 
 The packages in the `rqt` repository were released into the `jazzy` distro by running `/usr/bin/bloom-release --rosdistro jazzy --track jazzy rqt` on `Thu, 09 Oct 2025 14:45:38 -0000`
