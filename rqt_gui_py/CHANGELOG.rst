@@ -2,37 +2,24 @@
 Changelog for package rqt_gui_py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.6.1 (2025-10-09)
+1.1.8 (2025-10-09)
 ------------------
-* Fix setupTools deprecations (backport `#322 <https://github.com/ros-visualization/rqt/issues/322>`_) (`#327 <https://github.com/ros-visualization/rqt/issues/327>`_)
+* Fix setupTools deprecations (backport `#322 <https://github.com/ros-visualization/rqt/issues/322>`_) (`#328 <https://github.com/ros-visualization/rqt/issues/328>`_)
 * Contributors: mergify[bot]
 
-1.6.0 (2024-03-28)
+1.1.7 (2024-02-16)
 ------------------
 
-1.5.0 (2023-12-26)
+1.1.6 (2024-01-24)
 ------------------
-
-1.4.1 (2023-06-07)
-------------------
+* Merge pull request `#296 <https://github.com/ros-visualization/rqt/issues/296>`_ from daisukes/humble-backport-291
 * fix an exception raised while press ctrl+c to exit (`#291 <https://github.com/ros-visualization/rqt/issues/291>`_)
-* Contributors: Chen Lihui
+* Contributors: Chen Lihui, Dharini Dutia
 
-1.4.0 (2023-04-28)
+1.1.5 (2023-04-25)
 ------------------
 
-1.3.2 (2023-04-11)
-------------------
-
-1.3.1 (2023-02-24)
-------------------
-
-1.3.0 (2023-02-14)
-------------------
-* [rolling] Update maintainers - 2022-11-07 (`#283 <https://github.com/ros-visualization/rqt/issues/283>`_)
-* Contributors: Audrow Nash, Dharini Dutia, quarkytale
-
-1.2.0 (2022-05-10)
+1.1.4 (2022-05-10)
 ------------------
 
 1.1.3 (2022-04-05)
