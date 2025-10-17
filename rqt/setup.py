@@ -3,7 +3,7 @@ from setuptools import setup
 package_name = 'rqt'
 setup(
     name=package_name,
-    version='1.6.2',
+    version='1.1.9',
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
@@ -12,8 +12,8 @@ setup(
     zip_safe=True,
     author='Dirk Thomas, Dorian Scholz, Aaron Blasdel',
     author_email='dthomas@osrfoundation.org',
-    maintainer='Dharini Dutia',
-    maintainer_email='dharini@openrobotics.org',
+    maintainer='Dirk Thomas',
+    maintainer_email='dthomas@osrfoundation.org',
     keywords=['ROS'],
     classifiers=[
         'Intended Audience :: Developers',
@@ -29,5 +29,4 @@ setup(
     ),
     packages=[],
     license='BSD',
-    tests_require=['pytest'],
 )
