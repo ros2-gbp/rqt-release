@@ -28,8 +28,6 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-import rclpy
-
 from rqt_py_common.message_helpers import get_message_class
 
 
@@ -61,25 +59,29 @@ class TopicDict(object):
                 self.topic_dict[topic_name].append(
                     self._recursive_create_field_dict(topic_type, message))
 
-    def _recursive_create_field_dict(self, slot_name, field):
+    def _recursive_create_field_dict(self, field_name, field):
         field_dict = {}
-        field_dict[slot_name] = {
+        field_dict[field_name] = {
             'type': type(field),
             'children': {},
         }
 
-        if hasattr(field, '__slots__'):
-            for child_slot_name in field.__slots__:
-                field_dict[slot_name]['children'].update(
+        if hasattr(field, '_fields_and_field_types'):
+            for child_field_name in field.get_fields_and_field_types().keys():
+                field_dict[field_name]['children'].update(
                     self._recursive_create_field_dict(
-                        child_slot_name, getattr(field, child_slot_name)))
+                        child_field_name, getattr(field, child_field_name)))
         return field_dict
 
 
 if __name__ == '__main__':
     import pprint
-    rclpy.init()
-    topic_dict_node = rclpy.create_node('topic_dict')
-    pprint.pprint(TopicDict(node=topic_dict_node).get_topics())
-    topic_dict_node.destroy_node()
-    rclpy.shutdown()
+    import rclpy
+    from rclpy.executors import ExternalShutdownException
+
+    try:
+        with rclpy.init():
+            topic_dict_node = rclpy.create_node('topic_dict')
+            pprint.pprint(TopicDict(node=topic_dict_node).get_topics())
+    except (KeyboardInterrupt, ExternalShutdownException):
+        pass

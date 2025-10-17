@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.20)
 project(rqt_py_common)
 
 # Load catkin and all dependencies required for this package
@@ -13,17 +13,11 @@ install(DIRECTORY resource
 )
 
 if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  ament_lint_auto_find_test_dependencies()
+
   find_package(rosidl_default_generators REQUIRED)
   find_package(ament_cmake_pytest REQUIRED)
-  # Provides PYTHON_EXECUTABLE_DEBUG
-  find_package(python_cmake_module REQUIRED)
-  find_package(PythonExtra MODULE)
-
-  if(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set(${PROJECT_NAME}_PYTHON_EXECUTABLE "${PYTHON_EXECUTABLE_DEBUG}")
-  else()
-    set(${PROJECT_NAME}_PYTHON_EXECUTABLE "${PYTHON_EXECUTABLE}")
-  endif()
 
   # use different project name for generated test interfaces in order to make
   # them importable in the tests beside the Python module of this package
@@ -49,8 +43,8 @@ if(BUILD_TESTING)
   ament_add_pytest_test(${PROJECT_NAME} test
     ENV "AMENT_PREFIX_PATH=${CMAKE_CURRENT_BINARY_DIR}/ament_index"
     APPEND_ENV PYTHONPATH=${CMAKE_CURRENT_BINARY_DIR}/rosidl_generator_py
-    TIMEOUT 90,
-    PYTHON_EXECUTABLE "${${PROJECT_NAME}_PYTHON_EXECUTABLE}")
+    TIMEOUT 90
+  )
 endif()
 
 ament_package()
