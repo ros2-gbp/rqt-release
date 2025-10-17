@@ -1,0 +1,12 @@
+Source: ros-jazzy-rqt-gui
+Section: misc
+Priority: optional
+Maintainer: Dharini Dutia <dharini@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-ament-lint-common <!nocheck>, ros-jazzy-qt-gui (>= 0.3.0), ros-jazzy-ros-workspace, python3-all, python3-setuptools, dh-python
+Homepage: http://ros.org/wiki/rqt_gui
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-rqt-gui
+Architecture: any
+Depends: ${python3:Depends}, ${misc:Depends}, python3-catkin-pkg-modules, ros-jazzy-ament-index-python, ros-jazzy-python-qt-binding, ros-jazzy-qt-gui (>= 0.3.0), ros-jazzy-rclpy, ros-jazzy-ros-workspace
+Description: rqt_gui provides the main to start an instance of the ROS integrated graphical user interface provided by qt_gui.
