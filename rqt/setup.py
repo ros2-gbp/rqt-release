@@ -3,7 +3,7 @@ from setuptools import setup
 package_name = 'rqt'
 setup(
     name=package_name,
-    version='1.6.2',
+    version='1.6.3',
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
@@ -29,5 +29,8 @@ setup(
     ),
     packages=[],
     license='BSD',
-    tests_require=['pytest'],
-)
+    extras_require={
+        'test': [
+            'pytest',
+        ],
+    },)
