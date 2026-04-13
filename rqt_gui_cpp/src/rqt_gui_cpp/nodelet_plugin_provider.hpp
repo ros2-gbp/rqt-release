@@ -30,48 +30,47 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef rqt_gui_cpp__NodeletPluginProvider_H
-#define rqt_gui_cpp__NodeletPluginProvider_H
+#ifndef RQT_GUI_CPP__NODELET_PLUGIN_PROVIDER_HPP_
+#define RQT_GUI_CPP__NODELET_PLUGIN_PROVIDER_HPP_
 
-#include <qt_gui_cpp/ros_pluginlib_plugin_provider.h>
+#include <QThread>
+#include <memory>
+#include <string>
 
-#include <rqt_gui_cpp/plugin.h>
+#include <qt_gui_cpp/plugin_context.hpp>
+#include <qt_gui_cpp/ros_pluginlib_plugin_provider.hpp>
+
+#include <rqt_gui_cpp/plugin.hpp>
 
 #include <rclcpp/rclcpp.hpp>
 
-#include <QThread>
-
-#include <string>
-#include <unistd.h>
-#include <iostream>
-
-namespace rqt_gui_cpp {
-
-class RosCppPluginProvider;
+namespace rqt_gui_cpp
+{
 
 class NodeletPluginProvider
   : public qt_gui_cpp::RosPluginlibPluginProvider<rqt_gui_cpp::Plugin>
 {
-
 public:
-
-  NodeletPluginProvider(const QString& export_tag, const QString& base_class_type);
+  NodeletPluginProvider(const QString & export_tag, const QString & base_class_type);
 
   virtual ~NodeletPluginProvider();
 
-  virtual void unload(void* instance);
+  virtual void unload(void * instance);
 
 protected:
-
   void init_loader();
 
-  virtual std::shared_ptr<Plugin> create_plugin(const std::string& lookup_name, qt_gui_cpp::PluginContext* plugin_context);
+  virtual std::shared_ptr<Plugin> create_plugin(
+    const std::string & lookup_name,
+    qt_gui_cpp::PluginContext * plugin_context);
 
-  virtual void init_plugin(const QString& plugin_id, qt_gui_cpp::PluginContext* plugin_context, qt_gui_cpp::Plugin* plugin);
+  virtual void init_plugin(
+    const QString & plugin_id, qt_gui_cpp::PluginContext * plugin_context,
+    qt_gui_cpp::Plugin * plugin);
 
   std::shared_ptr<rqt_gui_cpp::Plugin> instance_;
 
-  QMap<void*, QString> instances_;
+  QMap<void *, QString> instances_;
 
   bool loader_initialized_;
 
@@ -82,8 +81,8 @@ protected:
   class RosSpinThread
     : public QThread
   {
-  public:
-    RosSpinThread(QObject* parent = 0);
+public:
+    explicit RosSpinThread(QObject * parent = 0);
     virtual ~RosSpinThread();
     void run();
     bool abort;
@@ -92,10 +91,7 @@ protected:
     rclcpp::executors::MultiThreadedExecutor exec_;
   };
 
-  RosSpinThread* ros_spin_thread_;
-
+  RosSpinThread * ros_spin_thread_;
 };
-
-}
-
-#endif // rqt_gui_cpp__NodeletPluginProvider_H
+}  // namespace rqt_gui_cpp
+#endif  // RQT_GUI_CPP__NODELET_PLUGIN_PROVIDER_HPP_

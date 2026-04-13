@@ -2,19 +2,38 @@
 Changelog for package rqt
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.6.3 (2026-01-21)
-------------------
-* fix setuptools deprecations (`#334 <https://github.com/ros-visualization/rqt/issues/334>`_) (`#336 <https://github.com/ros-visualization/rqt/issues/336>`_)
-  (cherry picked from commit dc64942338ef429c288f394f8c623494a0fcd302)
-  Co-authored-by: mosfet80 <10235105+mosfet80@users.noreply.github.com>
-* Contributors: mergify[bot]
+1.10.3 (2026-04-13)
+-------------------
+* fix setuptools deprecations (`#334 <https://github.com/ros-visualization/rqt/issues/334>`_)
+* Contributors: mosfet80
 
-1.6.2 (2025-10-17)
-------------------
-* fix setuptools deprecations (`#329 <https://github.com/ros-visualization/rqt/issues/329>`_) (`#331 <https://github.com/ros-visualization/rqt/issues/331>`_)
-* Contributors: mergify[bot]
+1.10.2 (2025-10-17)
+-------------------
+* fix setuptools deprecations (`#329 <https://github.com/ros-visualization/rqt/issues/329>`_)
+* Contributors: mosfet80
 
-1.6.1 (2025-10-09)
+1.10.1 (2025-10-09)
+-------------------
+
+1.10.0 (2025-04-28)
+-------------------
+
+1.9.0 (2025-02-02)
+------------------
+
+1.8.0 (2024-11-20)
+------------------
+
+1.7.3 (2024-10-03)
+------------------
+
+1.7.2 (2024-07-23)
+------------------
+
+1.7.1 (2024-07-10)
+------------------
+
+1.7.0 (2024-04-26)
 ------------------
 
 1.6.0 (2024-03-28)

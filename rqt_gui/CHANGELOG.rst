@@ -1,16 +1,39 @@
 Changelog for package rqt_gui
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.6.3 (2026-01-21)
+1.10.3 (2026-04-13)
+-------------------
+
+1.10.2 (2025-10-17)
+-------------------
+
+1.10.1 (2025-10-09)
+-------------------
+* Fix setupTools deprecations (`#322 <https://github.com/ros-visualization/rqt/issues/322>`_)
+* Contributors: mosfet80
+
+1.10.0 (2025-04-28)
+-------------------
+
+1.9.0 (2025-02-02)
+------------------
+* Add in standard tests for rqt_gui and rqt_gui_py (`#318 <https://github.com/ros-visualization/rqt/issues/318>`_)
+* Contributors: Chris Lalancette
+
+1.8.0 (2024-11-20)
 ------------------
 
-1.6.2 (2025-10-17)
+1.7.3 (2024-10-03)
 ------------------
 
-1.6.1 (2025-10-09)
+1.7.2 (2024-07-23)
 ------------------
-* Fix setupTools deprecations (backport `#322 <https://github.com/ros-visualization/rqt/issues/322>`_) (`#327 <https://github.com/ros-visualization/rqt/issues/327>`_)
-* Contributors: mergify[bot]
+
+1.7.1 (2024-07-10)
+------------------
+
+1.7.0 (2024-04-26)
+------------------
 
 1.6.0 (2024-03-28)
 ------------------
