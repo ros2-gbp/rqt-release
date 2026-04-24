@@ -1,3 +1,31 @@
+## rqt (rolling) - 1.10.4-1
+
+The packages in the `rqt` repository were released into the `rolling` distro by running `/usr/local/google/home/sloretz/projects/lyrical/env3/bin/bloom-release rqt -r rolling -t rolling` on `Fri, 24 Apr 2026 23:10:17 -0000`
+
+These packages were released:
+- `rqt`
+- `rqt_gui`
+- `rqt_gui_cpp`
+- `rqt_gui_py`
+- `rqt_py_common`
+
+Version of package(s) in repository `rqt`:
+
+- upstream repository: https://github.com/ros-visualization/rqt.git
+- release repository: https://github.com/ros2-gbp/rqt-release.git
+- rosdistro version: `1.10.3-1`
+- old version: `1.10.3-1`
+- new version: `1.10.4-1`
+
+Versions of tools used:
+
+- bloom version: `0.14.2`
+- catkin_pkg version: `1.1.0`
+- rosdep version: `0.26.0`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## rqt (rolling) - 1.10.3-1
 
 The packages in the `rqt` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --rosdistro rolling --track rolling rqt` on `Mon, 13 Apr 2026 10:52:59 -0000`
