@@ -1,0 +1,12 @@
+Source: ros-lyrical-rqt-gui
+Section: misc
+Priority: optional
+Maintainer: Dharini Dutia <dharini@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), python3-pytest <!nocheck>, ros-lyrical-ament-copyright <!nocheck>, ros-lyrical-ament-flake8 <!nocheck>, ros-lyrical-ament-pep257 <!nocheck>, ros-lyrical-ament-xmllint <!nocheck>, ros-lyrical-qt-gui (>= 0.3.0), ros-lyrical-ros-workspace, python3-all, python3-setuptools, dh-python
+Homepage: http://ros.org/wiki/rqt_gui
+Standards-Version: 3.9.2
+
+Package: ros-lyrical-rqt-gui
+Architecture: any
+Depends: ${python3:Depends}, ${misc:Depends}, python3-catkin-pkg-modules, ros-lyrical-ament-index-python, ros-lyrical-python-qt-binding, ros-lyrical-qt-gui (>= 0.3.0), ros-lyrical-rclpy, ros-lyrical-ros-workspace
+Description: rqt_gui provides the main to start an instance of the ROS integrated graphical user interface provided by qt_gui.
