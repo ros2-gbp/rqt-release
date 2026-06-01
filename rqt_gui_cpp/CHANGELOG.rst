@@ -2,55 +2,20 @@
 Changelog for package rqt_gui_cpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.10.5 (2026-05-06)
--------------------
-* Cleanup headers (`#347 <https://github.com/ros-visualization/rqt/issues/347>`_) (`#350 <https://github.com/ros-visualization/rqt/issues/350>`_)
+1.6.4 (2026-06-01)
+------------------
+* fix: include unistd.h for getpid (`#341 <https://github.com/ros-visualization/rqt/issues/341>`_) (`#343 <https://github.com/ros-visualization/rqt/issues/343>`_)
+  (cherry picked from commit 2b896cb2f1c29ab67160399c4c659d91178ece01)
+  Co-authored-by: Daisuke Nishimatsu <42202095+wep21@users.noreply.github.com>
 * Contributors: mergify[bot]
 
-1.10.4 (2026-04-24)
--------------------
-* Use qt-base-dev / libqtwidgets (`#345 <https://github.com/ros-visualization/rqt/issues/345>`_)
-* fix: include unistd.h for getpid (`#341 <https://github.com/ros-visualization/rqt/issues/341>`_)
-* Contributors: Daisuke Nishimatsu, Shane Loretz
-
-1.10.3 (2026-04-13)
--------------------
-* Support Qt6 (`#339 <https://github.com/ros-visualization/rqt/issues/339>`_)
-* Removed deprecated header (`#340 <https://github.com/ros-visualization/rqt/issues/340>`_)
-* Use qt6 as the default dependency from rosdep (`#337 <https://github.com/ros-visualization/rqt/issues/337>`_)
-* Contributors: Alejandro Hernández Cordero
-
-1.10.2 (2025-10-17)
--------------------
-
-1.10.1 (2025-10-09)
--------------------
-* fix compile with qt6 (`#321 <https://github.com/ros-visualization/rqt/issues/321>`_)
-* Contributors: mosfet80
-
-1.10.0 (2025-04-28)
--------------------
-
-1.9.0 (2025-02-02)
+1.6.3 (2026-01-21)
 ------------------
 
-1.8.0 (2024-11-20)
+1.6.2 (2025-10-17)
 ------------------
 
-1.7.3 (2024-10-03)
-------------------
-
-1.7.2 (2024-07-23)
-------------------
-* Added common test to rqt_gui_cpp and deprecate h headers (`#311 <https://github.com/ros-visualization/rqt/issues/311>`_)
-* Contributors: Alejandro Hernández Cordero
-
-1.7.1 (2024-07-10)
-------------------
-* Updated deprecated qt_gui_cpp headers (`#309 <https://github.com/ros-visualization/rqt/issues/309>`_)
-* Contributors: Alejandro Hernández Cordero
-
-1.7.0 (2024-04-26)
+1.6.1 (2025-10-09)
 ------------------
 
 1.6.0 (2024-03-28)

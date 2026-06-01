@@ -45,7 +45,7 @@ class SpinBoxDelegate(QItemDelegate):
     def createEditor(self, parent, option, index):
         editor = QDoubleSpinBox(parent)
         editor.setDecimals(self._decimals)
-        editor.setMininum(self._min)
+        editor.setMaximum(self._min)
         editor.setMaximum(self._max)
         return editor
 
@@ -66,7 +66,7 @@ class DelegateUtil(object):
     def _get_hierarchy_level(model_index):
         hierarchyLevel = 1
         seek_root = model_index
-        while seek_root.parent() != QModelIndex():
+        while(seek_root.parent() != QModelIndex()):
             seek_root = seek_root.parent()
             hierarchyLevel += 1
         return hierarchyLevel

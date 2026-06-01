@@ -49,13 +49,13 @@ def is_primitive_type(type_str):
         'string',
         'bool', 'boolean',
         # deprecated in ros1:
-        'byte']
+        'char', 'byte']
     return type_str in primitive_types
 
 
 def get_type_class(type_name):
     """
-    Get the python type from an idl string.
+    Gets the python type from an idl string.
 
     See: https://github.com/ros2/design/blob/gh-pages/articles/142_idl.md
 

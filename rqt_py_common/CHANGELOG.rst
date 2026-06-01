@@ -2,54 +2,16 @@
 Changelog for package rqt_py_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.10.5 (2026-05-06)
--------------------
-* Cleanup headers (`#347 <https://github.com/ros-visualization/rqt/issues/347>`_) (`#350 <https://github.com/ros-visualization/rqt/issues/350>`_)
-* Contributors: mergify[bot]
-
-1.10.4 (2026-04-24)
--------------------
-* Use qt-base-dev / libqtwidgets (`#345 <https://github.com/ros-visualization/rqt/issues/345>`_)
-* Contributors: Shane Loretz
-
-1.10.3 (2026-04-13)
--------------------
-* Support Qt6 (`#339 <https://github.com/ros-visualization/rqt/issues/339>`_)
-* Contributors: Alejandro Hernández Cordero
-
-1.10.2 (2025-10-17)
--------------------
-
-1.10.1 (2025-10-09)
--------------------
-* fix compile with qt6 (`#321 <https://github.com/ros-visualization/rqt/issues/321>`_)
-* Contributors: mosfet80
-
-1.10.0 (2025-04-28)
--------------------
-
-1.9.0 (2025-02-02)
+1.6.4 (2026-06-01)
 ------------------
 
-1.8.0 (2024-11-20)
-------------------
-* Stop using python_cmake_module. (`#304 <https://github.com/ros-visualization/rqt/issues/304>`_)
-* Contributors: Chris Lalancette
-
-1.7.3 (2024-10-03)
-------------------
-* Use an rclpy context manager. (`#312 <https://github.com/ros-visualization/rqt/issues/312>`_)
-* Contributors: Chris Lalancette
-
-1.7.2 (2024-07-23)
+1.6.3 (2026-01-21)
 ------------------
 
-1.7.1 (2024-07-10)
+1.6.2 (2025-10-17)
 ------------------
-* Added common test to rqt_py_common (`#310 <https://github.com/ros-visualization/rqt/issues/310>`_)
-* Contributors: Alejandro Hernández Cordero
 
-1.7.0 (2024-04-26)
+1.6.1 (2025-10-09)
 ------------------
 
 1.6.0 (2024-03-28)

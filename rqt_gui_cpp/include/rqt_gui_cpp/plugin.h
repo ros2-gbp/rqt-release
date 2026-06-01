@@ -30,34 +30,54 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef RQT_GUI_CPP__ROSCPP_PLUGIN_PROVIDER_HPP_
-#define RQT_GUI_CPP__ROSCPP_PLUGIN_PROVIDER_HPP_
+#ifndef rqt_gui_cpp__Plugin_H
+#define rqt_gui_cpp__Plugin_H
 
-#include <string>
+#include <qt_gui_cpp/plugin.h>
+#include <qt_gui_cpp/plugin_context.h>
+#include <qt_gui_cpp/settings.h>
 
-#include <qt_gui_cpp/composite_plugin_provider.hpp>
+#include <rclcpp/rclcpp.hpp>
 
-namespace rqt_gui_cpp
+namespace rqt_gui_cpp {
+
+/**
+ * The base class for C++ plugins which use the ROS client library.
+ * A plugin must not call rclcpp::init() as this is performed once by the framework.
+ */
+class Plugin
+  : public qt_gui_cpp::Plugin
 {
 
-class RosCppPluginProvider
-  : public qt_gui_cpp::CompositePluginProvider
-{
 public:
-  RosCppPluginProvider();
 
-  virtual ~RosCppPluginProvider();
+  Plugin()
+    : qt_gui_cpp::Plugin()
+  {}
 
-  virtual void * load(const QString & plugin_id, qt_gui_cpp::PluginContext * plugin_context);
+  /**
+   * Shutdown and clean up the plugin before unloading.
+   * I.e. unregister subscribers and stop timers.
+   */
+  virtual void shutdownPlugin()
+  {}
 
-  virtual qt_gui_cpp::Plugin * load_plugin(
-    const QString & plugin_id,
-    qt_gui_cpp::PluginContext * plugin_context);
+  virtual void passInNode(std::shared_ptr<rclcpp::Node> node)
+  {
+    node_ = node;
+  }
 
 protected:
-  void init_rclcpp();
 
-  bool rclcpp_initialized_;
+  rclcpp::Node::SharedPtr node_;
+
+private:
+
+  void onInit()
+  {}
+
 };
-}  // namespace rqt_gui_cpp
-#endif  // RQT_GUI_CPP__ROSCPP_PLUGIN_PROVIDER_HPP_
+
+} // namespace
+
+#endif // rqt_gui_cpp__Plugin_H
