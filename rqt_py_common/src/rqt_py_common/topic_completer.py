@@ -32,15 +32,15 @@
 
 from python_qt_binding.QtCore import qWarning
 
-from rqt_py_common.message_tree_model import MessageTreeModel
 from rqt_py_common.message_helpers import get_message_class
+from rqt_py_common.message_tree_model import MessageTreeModel
 from rqt_py_common.tree_model_completer import TreeModelCompleter
 
 
 class TopicCompleter(TreeModelCompleter):
 
     def __init__(self, parent=None):
-        super(TopicCompleter, self).__init__(parent)
+        super().__init__(parent)
         self.setModel(MessageTreeModel())
 
     def splitPath(self, path):
@@ -59,12 +59,12 @@ class TopicCompleter(TreeModelCompleter):
                     subfield_topic = path.replace(topic, '')
                     # Remove backslash at the end of the topic name
                     result = [topic[1:]]
-                    result2 = super(TopicCompleter, self).splitPath(
+                    result2 = super().splitPath(
                         subfield_topic.replace('[', '/['))
                     result = result + result2
                     return result
 
-        return super(TopicCompleter, self).splitPath(path.replace('[', '/['))
+        return super().splitPath(path.replace('[', '/['))
 
     def update_topics(self, node):
         # Note: This has changed from ROS1->2 as ROS2 only allows nodes to query
@@ -80,9 +80,10 @@ class TopicCompleter(TreeModelCompleter):
                 topic_name = topic_path.strip('/')
                 message_class = get_message_class(topic_type)
                 if message_class is None:
-                    qWarning('TopicCompleter.update_topics(): '
-                             'could not get message class for topic type "%s" on topic "%s"' %
-                             (topic_type, topic_path))
+                    qWarning(
+                        'TopicCompleter.update_topics(): '
+                        f'could not get message class for topic type "{topic_type}" '
+                        f'on topic "{topic_path}"')
                     continue
                 message_instance = message_class()
                 self.model().add_message(message_instance, topic_name, topic_type, topic_path)
@@ -91,56 +92,58 @@ class TopicCompleter(TreeModelCompleter):
 if __name__ == '__main__':
     import sys
     from python_qt_binding.QtWidgets import \
-        QApplication, QComboBox, QLineEdit, QMainWindow, \
+        QApplication, QComboBox, QCompleter, QLineEdit, QMainWindow, \
         QTreeView, QVBoxLayout, QWidget
 
     import rclpy
-    rclpy.init()
-    topic_completer_node = rclpy.create_node()
+    from rclpy.executors import ExternalShutdownException
 
-    app = QApplication(sys.argv)
-    mw = QMainWindow()
-    widget = QWidget(mw)
-    layout = QVBoxLayout(widget)
+    try:
+        with rclpy.init():
+            topic_completer_node = rclpy.create_node()
 
-    edit = QLineEdit()
-    edit_completer = TopicCompleter(edit)
-    edit_completer.update_topics(topic_completer_node)
-    # edit_completer.setCompletionMode(QCompleter.InlineCompletion)
-    edit.setCompleter(edit_completer)
+            app = QApplication(sys.argv)
+            mw = QMainWindow()
+            widget = QWidget(mw)
+            layout = QVBoxLayout(widget)
 
-    combo = QComboBox()
-    combo.setEditable(True)
-    combo_completer = TopicCompleter(combo)
-    combo_completer.update_topics(topic_completer_node)
+            edit = QLineEdit()
+            edit_completer = TopicCompleter(edit)
+            edit_completer.update_topics(topic_completer_node)
+            edit_completer.setCompletionMode(QCompleter.CompletionMode.InlineCompletion)
+            edit.setCompleter(edit_completer)
 
-    # combo_completer.setCompletionMode(QCompleter.InlineCompletion)
-    combo.lineEdit().setCompleter(combo_completer)
+            combo = QComboBox()
+            combo.setEditable(True)
+            combo_completer = TopicCompleter(combo)
+            combo_completer.update_topics(topic_completer_node)
 
-    model_tree = QTreeView()
-    model_tree.setModel(combo_completer.model())
-    model_tree.expandAll()
-    for column in range(combo_completer.model().columnCount()):
-        model_tree.resizeColumnToContents(column)
+            combo_completer.setCompletionMode(QCompleter.CompletionMode.InlineCompletion)
+            combo.lineEdit().setCompleter(combo_completer)
 
-    completion_tree = QTreeView()
-    completion_tree.setModel(combo_completer.completionModel())
-    completion_tree.expandAll()
-    for column in range(combo_completer.completionModel().columnCount()):
-        completion_tree.resizeColumnToContents(column)
+            model_tree = QTreeView()
+            model_tree.setModel(combo_completer.model())
+            model_tree.expandAll()
+            for column in range(combo_completer.model().columnCount()):
+                model_tree.resizeColumnToContents(column)
 
-    layout.addWidget(model_tree)
-    layout.addWidget(completion_tree)
-    layout.addWidget(edit)
-    layout.addWidget(combo)
-    layout.setStretchFactor(model_tree, 1)
-    widget.setLayout(layout)
-    mw.setCentralWidget(widget)
+            completion_tree = QTreeView()
+            completion_tree.setModel(combo_completer.completionModel())
+            completion_tree.expandAll()
+            for column in range(combo_completer.completionModel().columnCount()):
+                completion_tree.resizeColumnToContents(column)
 
-    mw.move(300, 0)
-    mw.resize(800, 900)
-    mw.show()
-    app.exec_()
+            layout.addWidget(model_tree)
+            layout.addWidget(completion_tree)
+            layout.addWidget(edit)
+            layout.addWidget(combo)
+            layout.setStretchFactor(model_tree, 1)
+            widget.setLayout(layout)
+            mw.setCentralWidget(widget)
 
-    topic_completer_node.destroy_node()
-    rclpy.shutdown()
+            mw.move(300, 0)
+            mw.resize(800, 900)
+            mw.show()
+            app.exec()
+    except (KeyboardInterrupt, ExternalShutdownException):
+        pass

@@ -30,7 +30,6 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-from python_qt_binding.QtCore import QModelIndex
 from python_qt_binding.QtWidgets import QDoubleSpinBox, QItemDelegate
 
 
@@ -40,33 +39,11 @@ class SpinBoxDelegate(QItemDelegate):
         self._min = min_value
         self._max = max_value
         self._decimals = decimals
-        super(SpinBoxDelegate, self).__init__(*args)
+        super().__init__(*args)
 
     def createEditor(self, parent, option, index):
         editor = QDoubleSpinBox(parent)
         editor.setDecimals(self._decimals)
-        editor.setMaximum(self._min)
+        editor.setMinimum(self._min)
         editor.setMaximum(self._max)
         return editor
-
-
-class DelegateUtil(object):
-    """
-    Find out the hierarchy level of the selected item.
-
-    see: http://stackoverflow.com/a/4208240/577001
-
-    :type model_index: QModelIndex
-    :rtype: int
-
-    :author: Isaac Saito
-    """
-
-    @staticmethod
-    def _get_hierarchy_level(model_index):
-        hierarchyLevel = 1
-        seek_root = model_index
-        while(seek_root.parent() != QModelIndex()):
-            seek_root = seek_root.parent()
-            hierarchyLevel += 1
-        return hierarchyLevel
