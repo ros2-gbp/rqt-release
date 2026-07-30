@@ -33,8 +33,6 @@
 #ifndef RQT_GUI_CPP__ROSCPP_PLUGIN_PROVIDER_HPP_
 #define RQT_GUI_CPP__ROSCPP_PLUGIN_PROVIDER_HPP_
 
-#include <string>
-
 #include <qt_gui_cpp/composite_plugin_provider.hpp>
 
 namespace rqt_gui_cpp
@@ -46,13 +44,13 @@ class RosCppPluginProvider
 public:
   RosCppPluginProvider();
 
-  virtual ~RosCppPluginProvider();
+  ~RosCppPluginProvider() override;
 
-  virtual void * load(const QString & plugin_id, qt_gui_cpp::PluginContext * plugin_context);
+  void * load(const QString & plugin_id, qt_gui_cpp::PluginContext * plugin_context) override;
 
-  virtual qt_gui_cpp::Plugin * load_plugin(
+  qt_gui_cpp::Plugin * load_plugin(
     const QString & plugin_id,
-    qt_gui_cpp::PluginContext * plugin_context);
+    qt_gui_cpp::PluginContext * plugin_context) override;
 
 protected:
   void init_rclcpp();
