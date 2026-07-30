@@ -32,6 +32,8 @@
 
 #include "roscpp_plugin_provider.hpp"
 
+#include <string>
+
 #include "nodelet_plugin_provider.hpp"
 
 #include <qt_gui_cpp/plugin_provider.hpp>
@@ -86,7 +88,7 @@ void RosCppPluginProvider::init_rclcpp()
   // initialize ROS node once
   if (!rclcpp_initialized_) {
     int argc = 0;
-    char ** argv = 0;
+    char ** argv = nullptr;
 
     // Initialize any global resources needed by the middleware and the client library.
     // This will also parse command line arguments one day (as of Beta 1 they are not used).
