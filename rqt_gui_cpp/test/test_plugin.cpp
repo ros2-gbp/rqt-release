@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011, Dirk Thomas, TU Darmstadt
+ * Copyright (c) 2026, Open Source Robotics Foundation, Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,41 +30,63 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef RQT_GUI_CPP__PLUGIN_HPP_
-#define RQT_GUI_CPP__PLUGIN_HPP_
+#include <gtest/gtest.h>
 
 #include <memory>
 
-#include <qt_gui_cpp/plugin.hpp>
-#include <qt_gui_cpp/plugin_context.hpp>
-#include <qt_gui_cpp/settings.hpp>
-
 #include <rclcpp/rclcpp.hpp>
+#include <rqt_gui_cpp/plugin.hpp>
 
-namespace rqt_gui_cpp
+namespace
 {
 
-/**
- * The base class for C++ plugins which use the ROS client library.
- * A plugin must not call rclcpp::init() as this is performed once by the framework.
- */
-class Plugin
-  : public qt_gui_cpp::Plugin
+// Minimal concrete plugin used to exercise the rqt_gui_cpp::Plugin base class.
+// It exposes the protected node_ member so the test can verify passInNode().
+class TestPlugin
+  : public rqt_gui_cpp::Plugin
 {
 public:
-  Plugin();
-
-  /**
-   * Shutdown and clean up the plugin before unloading.
-   * I.e. unregister subscribers and stop timers.
-   */
-  void shutdownPlugin() override;
-
-  virtual void passInNode(std::shared_ptr<rclcpp::Node> node);
-
-protected:
-  rclcpp::Node::SharedPtr node_;
+  rclcpp::Node::SharedPtr node() const
+  {
+    return node_;
+  }
 };
-}  // namespace rqt_gui_cpp
 
-#endif  // RQT_GUI_CPP__PLUGIN_HPP_
+}  // namespace
+
+class PluginTest
+  : public ::testing::Test
+{
+protected:
+  void SetUp() override
+  {
+    rclcpp::init(0, nullptr);
+  }
+
+  void TearDown() override
+  {
+    rclcpp::shutdown();
+  }
+};
+
+TEST_F(PluginTest, node_is_null_before_pass_in_node)
+{
+  TestPlugin plugin;
+  EXPECT_EQ(plugin.node(), nullptr);
+}
+
+TEST_F(PluginTest, pass_in_node_stores_the_node)
+{
+  TestPlugin plugin;
+  auto node = std::make_shared<rclcpp::Node>("test_rqt_gui_cpp_plugin");
+
+  plugin.passInNode(node);
+
+  EXPECT_EQ(plugin.node(), node);
+}
+
+TEST_F(PluginTest, shutdown_plugin_is_safe_to_call)
+{
+  TestPlugin plugin;
+  EXPECT_NO_THROW(plugin.shutdownPlugin());
+}
