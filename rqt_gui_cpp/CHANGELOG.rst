@@ -2,102 +2,28 @@
 Changelog for package rqt_gui_cpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.0.3 (2026-09-04)
-------------------
-* Removed Qt5 support (`#368 <https://github.com/ros-visualization/rqt/issues/368>`_)
-* granular rclcpp includes (`#363 <https://github.com/ros-visualization/rqt/issues/363>`_)
-* Contributors: Alejandro Hernández Cordero
-
-2.0.2 (2026-07-30)
-------------------
-* Added unit test for Plufin base class (`#362 <https://github.com/ros-visualization/rqt/issues/362>`_)
-* fix ROSspinThread shutdown data race and prune unloaded instances (`#361 <https://github.com/ros-visualization/rqt/issues/361>`_)
-* drop redundant instance\_ member (`#360 <https://github.com/ros-visualization/rqt/issues/360>`_)
-* Move implementation from hpp to cpp (`#359 <https://github.com/ros-visualization/rqt/issues/359>`_)
-* modernize to cpp20 (`#358 <https://github.com/ros-visualization/rqt/issues/358>`_)
-* Contributors: Alejandro Hernández Cordero
-
-2.0.1 (2026-06-18)
-------------------
-
-2.0.0 (2026-05-06)
-------------------
-* Cleanup headers (`#347 <https://github.com/ros-visualization/rqt/issues/347>`_)
-* Contributors: Alejandro Hernández Cordero
-
-1.10.4 (2026-04-24)
+1.1.10 (2026-09-06)
 -------------------
-* Use qt-base-dev / libqtwidgets (`#345 <https://github.com/ros-visualization/rqt/issues/345>`_)
-* fix: include unistd.h for getpid (`#341 <https://github.com/ros-visualization/rqt/issues/341>`_)
-* Contributors: Daisuke Nishimatsu, Shane Loretz
+* granular rclcpp includes (backport `#363 <https://github.com/ros-visualization/rqt/issues/363>`_) (`#367 <https://github.com/ros-visualization/rqt/issues/367>`_)
+* fix: include unistd.h for getpid (backport `#341 <https://github.com/ros-visualization/rqt/issues/341>`_) (`#344 <https://github.com/ros-visualization/rqt/issues/344>`_)
+* Contributors: mergify[bot]
 
-1.10.3 (2026-04-13)
--------------------
-* Support Qt6 (`#339 <https://github.com/ros-visualization/rqt/issues/339>`_)
-* Removed deprecated header (`#340 <https://github.com/ros-visualization/rqt/issues/340>`_)
-* Use qt6 as the default dependency from rosdep (`#337 <https://github.com/ros-visualization/rqt/issues/337>`_)
-* Contributors: Alejandro Hernández Cordero
-
-1.10.2 (2025-10-17)
--------------------
-
-1.10.1 (2025-10-09)
--------------------
-* fix compile with qt6 (`#321 <https://github.com/ros-visualization/rqt/issues/321>`_)
-* Contributors: mosfet80
-
-1.10.0 (2025-04-28)
--------------------
-
-1.9.0 (2025-02-02)
+1.1.9 (2025-10-17)
 ------------------
 
-1.8.0 (2024-11-20)
+1.1.8 (2025-10-09)
 ------------------
 
-1.7.3 (2024-10-03)
+1.1.7 (2024-02-16)
 ------------------
 
-1.7.2 (2024-07-23)
-------------------
-* Added common test to rqt_gui_cpp and deprecate h headers (`#311 <https://github.com/ros-visualization/rqt/issues/311>`_)
-* Contributors: Alejandro Hernández Cordero
-
-1.7.1 (2024-07-10)
-------------------
-* Updated deprecated qt_gui_cpp headers (`#309 <https://github.com/ros-visualization/rqt/issues/309>`_)
-* Contributors: Alejandro Hernández Cordero
-
-1.7.0 (2024-04-26)
+1.1.6 (2024-01-24)
 ------------------
 
-1.6.0 (2024-03-28)
+1.1.5 (2023-04-25)
 ------------------
 
-1.5.0 (2023-12-26)
-------------------
-* Switch to target_link_libraries. (`#297 <https://github.com/ros-visualization/rqt/issues/297>`_)
-* Contributors: Chris Lalancette
-
-1.4.1 (2023-06-07)
-------------------
-
-1.4.0 (2023-04-28)
-------------------
-
-1.3.2 (2023-04-11)
-------------------
-
-1.3.1 (2023-02-24)
-------------------
-
-1.3.0 (2023-02-14)
-------------------
-* Update rqt to C++17. (`#285 <https://github.com/ros-visualization/rqt/issues/285>`_)
-* [rolling] Update maintainers - 2022-11-07 (`#283 <https://github.com/ros-visualization/rqt/issues/283>`_)
-* Contributors: Audrow Nash, Chris Lalancette, Dharini Dutia, quarkytale
-
-1.2.0 (2022-05-10)
+1.1.4 (2022-05-10)
 ------------------
 
 1.1.3 (2022-04-05)

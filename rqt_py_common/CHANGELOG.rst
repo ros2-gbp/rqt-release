@@ -2,97 +2,27 @@
 Changelog for package rqt_py_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.0.3 (2026-09-04)
-------------------
-
-2.0.2 (2026-07-30)
-------------------
-
-2.0.1 (2026-06-18)
-------------------
-* Use logger.warning(), f-string , super() and Qt6 fixes (`#354 <https://github.com/ros-visualization/rqt/issues/354>`_)
-* Removed deprecated static method get_full_grn (`#348 <https://github.com/ros-visualization/rqt/issues/348>`_)
-* Removed dead code (`#349 <https://github.com/ros-visualization/rqt/issues/349>`_)
-* Contributors: Alejandro Hernández Cordero
-
-2.0.0 (2026-05-06)
-------------------
-* Cleanup headers (`#347 <https://github.com/ros-visualization/rqt/issues/347>`_)
-* Contributors: Alejandro Hernández Cordero
-
-1.10.4 (2026-04-24)
--------------------
-* Use qt-base-dev / libqtwidgets (`#345 <https://github.com/ros-visualization/rqt/issues/345>`_)
-* Contributors: Shane Loretz
-
-1.10.3 (2026-04-13)
--------------------
-* Support Qt6 (`#339 <https://github.com/ros-visualization/rqt/issues/339>`_)
-* Contributors: Alejandro Hernández Cordero
-
-1.10.2 (2025-10-17)
+1.1.10 (2026-09-06)
 -------------------
 
-1.10.1 (2025-10-09)
--------------------
-* fix compile with qt6 (`#321 <https://github.com/ros-visualization/rqt/issues/321>`_)
-* Contributors: mosfet80
-
-1.10.0 (2025-04-28)
--------------------
-
-1.9.0 (2025-02-02)
+1.1.9 (2025-10-17)
 ------------------
 
-1.8.0 (2024-11-20)
-------------------
-* Stop using python_cmake_module. (`#304 <https://github.com/ros-visualization/rqt/issues/304>`_)
-* Contributors: Chris Lalancette
-
-1.7.3 (2024-10-03)
-------------------
-* Use an rclpy context manager. (`#312 <https://github.com/ros-visualization/rqt/issues/312>`_)
-* Contributors: Chris Lalancette
-
-1.7.2 (2024-07-23)
+1.1.8 (2025-10-09)
 ------------------
 
-1.7.1 (2024-07-10)
+1.1.7 (2024-02-16)
 ------------------
-* Added common test to rqt_py_common (`#310 <https://github.com/ros-visualization/rqt/issues/310>`_)
+* Allow to autocomplete namespaced topics (`#299 <https://github.com/ros-visualization/rqt/issues/299>`_) (`#302 <https://github.com/ros-visualization/rqt/issues/302>`_)
 * Contributors: Alejandro Hernández Cordero
 
-1.7.0 (2024-04-26)
+1.1.6 (2024-01-24)
 ------------------
 
-1.6.0 (2024-03-28)
-------------------
-* Allow to autocomplete namespaced topics (`#299 <https://github.com/ros-visualization/rqt/issues/299>`_)
-* Contributors: Alejandro Hernández Cordero
-
-1.5.0 (2023-12-26)
+1.1.5 (2023-04-25)
 ------------------
 
-1.4.1 (2023-06-07)
-------------------
-
-1.4.0 (2023-04-28)
-------------------
-
-1.3.2 (2023-04-11)
-------------------
-* Changes the use of __slots_\_ for the field and field type getter (`#289 <https://github.com/ros-visualization/rqt/issues/289>`_)
-* Contributors: Eloy Briceno
-
-1.3.1 (2023-02-24)
-------------------
-
-1.3.0 (2023-02-14)
-------------------
-* [rolling] Update maintainers - 2022-11-07 (`#283 <https://github.com/ros-visualization/rqt/issues/283>`_)
-* Contributors: Audrow Nash, Dharini Dutia, quarkytale
-
-1.2.0 (2022-05-10)
+1.1.4 (2022-05-10)
 ------------------
 
 1.1.3 (2022-04-05)

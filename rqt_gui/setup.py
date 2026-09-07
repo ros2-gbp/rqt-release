@@ -3,7 +3,7 @@ from setuptools import setup
 package_name = 'rqt_gui'
 setup(
     name=package_name,
-    version='2.0.3',
+    version='1.1.10',
     package_dir={'': 'src'},
     packages=['rqt_gui'],
     data_files=[
@@ -21,8 +21,8 @@ setup(
     zip_safe=True,
     author='Dirk Thomas',
     author_email='dthomas@osrfoundation.org',
-    maintainer='Dharini Dutia',
-    maintainer_email='dharini@openrobotics.org',
+    maintainer='Dirk Thomas',
+    maintainer_email='dthomas@osrfoundation.org',
     keywords=['ROS'],
     classifiers=[
         'Intended Audience :: Developers',

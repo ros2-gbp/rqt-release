@@ -1,8 +1,7 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.5)
 project(rqt_gui_cpp)
 
 find_package(ament_cmake REQUIRED)
-find_package(ament_cmake_ros_core REQUIRED)
 
 if(WIN32)
   message(STATUS "rqt_gui_cpp is not yet supported on Windows. Package will not be built.")
@@ -10,38 +9,34 @@ if(WIN32)
   return()
 endif()
 
-# The C++ standard (C++20) is provided by the
-# ament_cmake_ros_core::ament_ros_defaults interface target linked below.
+# Default to C++14
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic -fPIC)
 endif()
 
-
+# Qt5 boilerplate options from http://doc.qt.io/qt-5/cmake-manual.html
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
 find_package(pluginlib REQUIRED)
-# Avoid find_package(QT NAMES Qt6 Qt5 ...) due to CMake's default ascending path resolution
-find_package(Qt6 QUIET COMPONENTS Widgets)
-if(Qt6_FOUND)
-  set(QT_VERSION_MAJOR 6)
-else()
-  find_package(Qt5 REQUIRED COMPONENTS Widgets)
-  set(QT_VERSION_MAJOR 5)
-endif()
-set(QT_VERSION "${Qt${QT_VERSION_MAJOR}_VERSION}")
+find_package(Qt5Widgets CONFIG REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(qt_gui REQUIRED)
 find_package(qt_gui_cpp REQUIRED)
 
 ament_export_dependencies(
+  Qt5Widgets
+  pluginlib
   rclcpp
   qt_gui_cpp
-)
+  qt_gui)
 
 add_library(${PROJECT_NAME} SHARED
   src/rqt_gui_cpp/nodelet_plugin_provider.cpp
-  src/rqt_gui_cpp/plugin.cpp
   src/rqt_gui_cpp/roscpp_plugin_provider.cpp
 )
 target_include_directories(${PROJECT_NAME} PUBLIC
@@ -52,31 +47,13 @@ if(APPLE)
   set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
 endif()
 
-target_link_libraries(${PROJECT_NAME} PUBLIC
-  qt_gui_cpp::qt_gui_cpp
-  rclcpp::rclcpp
-)
-
-target_link_libraries(${PROJECT_NAME} PRIVATE
-  ament_cmake_ros_core::ament_ros_defaults
-  pluginlib::pluginlib
-  Qt${QT_VERSION_MAJOR}::Widgets
-)
-
-if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  ament_lint_auto_find_test_dependencies()
-
-  find_package(ament_cmake_gtest REQUIRED)
-  ament_add_gtest(test_plugin test/test_plugin.cpp)
-  if(TARGET test_plugin)
-    target_link_libraries(test_plugin
-      ${PROJECT_NAME}
-      rclcpp::rclcpp
-      Qt${QT_VERSION_MAJOR}::Widgets
-    )
-  endif()
-endif()
+ament_target_dependencies(${PROJECT_NAME}
+  rclcpp
+  Qt5Widgets
+  pluginlib
+  rclcpp
+  qt_gui_cpp
+  qt_gui)
 
 install(
   TARGETS ${PROJECT_NAME}

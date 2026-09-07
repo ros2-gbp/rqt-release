@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026, Open Source Robotics Foundation, Inc.
+ * Copyright (c) 2011, Dirk Thomas, TU Darmstadt
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,63 +30,54 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <gtest/gtest.h>
+#ifndef rqt_gui_cpp__Plugin_H
+#define rqt_gui_cpp__Plugin_H
 
-#include <memory>
+#include <qt_gui_cpp/plugin.h>
+#include <qt_gui_cpp/plugin_context.h>
+#include <qt_gui_cpp/settings.h>
 
-#include <rclcpp/rclcpp.hpp>
-#include <rqt_gui_cpp/plugin.hpp>
+#include <rclcpp/node.hpp>
 
-namespace
+namespace rqt_gui_cpp {
+
+/**
+ * The base class for C++ plugins which use the ROS client library.
+ * A plugin must not call rclcpp::init() as this is performed once by the framework.
+ */
+class Plugin
+  : public qt_gui_cpp::Plugin
 {
 
-// Minimal concrete plugin used to exercise the rqt_gui_cpp::Plugin base class.
-// It exposes the protected node_ member so the test can verify passInNode().
-class TestPlugin
-  : public rqt_gui_cpp::Plugin
-{
 public:
-  rclcpp::Node::SharedPtr node() const
+
+  Plugin()
+    : qt_gui_cpp::Plugin()
+  {}
+
+  /**
+   * Shutdown and clean up the plugin before unloading.
+   * I.e. unregister subscribers and stop timers.
+   */
+  virtual void shutdownPlugin()
+  {}
+
+  virtual void passInNode(std::shared_ptr<rclcpp::Node> node)
   {
-    return node_;
+    node_ = node;
   }
-};
 
-}  // namespace
-
-class PluginTest
-  : public ::testing::Test
-{
 protected:
-  void SetUp() override
-  {
-    rclcpp::init(0, nullptr);
-  }
 
-  void TearDown() override
-  {
-    rclcpp::shutdown();
-  }
+  rclcpp::Node::SharedPtr node_;
+
+private:
+
+  void onInit()
+  {}
+
 };
 
-TEST_F(PluginTest, node_is_null_before_pass_in_node)
-{
-  TestPlugin plugin;
-  EXPECT_EQ(plugin.node(), nullptr);
-}
+} // namespace
 
-TEST_F(PluginTest, pass_in_node_stores_the_node)
-{
-  TestPlugin plugin;
-  auto node = std::make_shared<rclcpp::Node>("test_rqt_gui_cpp_plugin");
-
-  plugin.passInNode(node);
-
-  EXPECT_EQ(plugin.node(), node);
-}
-
-TEST_F(PluginTest, shutdown_plugin_is_safe_to_call)
-{
-  TestPlugin plugin;
-  EXPECT_NO_THROW(plugin.shutdownPlugin());
-}
+#endif // rqt_gui_cpp__Plugin_H
