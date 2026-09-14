@@ -30,40 +30,21 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef rqt_gui_cpp__RosCppPluginProvider_H
-#define rqt_gui_cpp__RosCppPluginProvider_H
+#include "rqt_gui_cpp/plugin.hpp"
 
-#include <qt_gui_cpp/composite_plugin_provider.h>
+#include <memory>
 
-#include <QMessageBox>
-#include <QThread>
-
-#include <string>
-
-namespace rqt_gui_cpp {
-
-class RosCppPluginProvider
-  : public qt_gui_cpp::CompositePluginProvider
+namespace rqt_gui_cpp
 {
 
-public:
+Plugin::Plugin() = default;
 
-  RosCppPluginProvider();
+void Plugin::shutdownPlugin()
+{}
 
-  virtual ~RosCppPluginProvider();
-
-  virtual void* load(const QString& plugin_id, qt_gui_cpp::PluginContext* plugin_context);
-
-  virtual qt_gui_cpp::Plugin* load_plugin(const QString& plugin_id, qt_gui_cpp::PluginContext* plugin_context);
-
-protected:
-
-  void init_rclcpp();
-
-  bool rclcpp_initialized_;
-
-};
-
+void Plugin::passInNode(std::shared_ptr<rclcpp::Node> node)
+{
+  node_ = node;
 }
 
-#endif // rqt_gui_cpp__RosCppPluginProvider_H
+}  // namespace rqt_gui_cpp

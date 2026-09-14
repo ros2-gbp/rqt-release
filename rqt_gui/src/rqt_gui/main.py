@@ -1,7 +1,3 @@
-#!/usr/bin/env python3
-
-# Software License Agreement (BSD License)
-#
 # Copyright (c) 2012, Willow Garage, Inc.
 # All rights reserved.
 #
@@ -9,21 +5,21 @@
 # modification, are permitted provided that the following conditions
 # are met:
 #
-#  * Redistributions of source code must retain the above copyright
-#    notice, this list of conditions and the following disclaimer.
-#  * Redistributions in binary form must reproduce the above
-#    copyright notice, this list of conditions and the following
-#    disclaimer in the documentation and/or other materials provided
-#    with the distribution.
-#  * Neither the name of Willow Garage, Inc. nor the names of its
-#    contributors may be used to endorse or promote products derived
-#    from this software without specific prior written permission.
+#   * Redistributions of source code must retain the above copyright
+#     notice, this list of conditions and the following disclaimer.
+#   * Redistributions in binary form must reproduce the above
+#     copyright notice, this list of conditions and the following
+#     disclaimer in the documentation and/or other materials provided
+#     with the distribution.
+#   * Neither the name of the Willow Garage, Inc. nor the names of its
+#     contributors may be used to endorse or promote products derived
+#     from this software without specific prior written permission.
 #
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 # LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
 # FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-# COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+# COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
 # INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
 # BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
 # LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
@@ -44,7 +40,7 @@ class Main(Base):
 
     def __init__(self, filename=None, settings_filename='rqt_gui'):
         qtgui_path = get_package_path('qt_gui')
-        super(Main, self).__init__(
+        super().__init__(
             qtgui_path, invoked_filename=filename, settings_filename=settings_filename)
 
     def main(self, argv=None, standalone=None, plugin_argument_provider=None):
@@ -59,7 +55,7 @@ the <b>Plugins</b> menu.</p>
 <p>You may also save a particular arrangement of plug-ins as a <i>perspective</i> using the
 <b>Perspectives</b> menu.
 """
-        return super(Main, self).main(
+        return super().main(
             argv,
             standalone=standalone,
             plugin_argument_provider=plugin_argument_provider,
@@ -67,7 +63,7 @@ the <b>Plugins</b> menu.</p>
 
     def create_application(self, argv):
         from python_qt_binding.QtGui import QIcon
-        app = super(Main, self).create_application(argv)
+        app = super().create_application(argv)
         rqt_gui_path = get_package_path('rqt_gui')
         logo = os.path.join(rqt_gui_path, 'share', 'rqt_gui', 'resource', 'rqt.png')
         icon = QIcon(logo)
@@ -86,7 +82,7 @@ the <b>Plugins</b> menu.</p>
             RospkgPluginProvider('rqt_gui', 'rqt_gui_py::PluginProvider')))
 
     def _add_reload_paths(self, reload_importer):
-        super(Main, self)._add_reload_paths(reload_importer)
+        super()._add_reload_paths(reload_importer)
         reload_importer.add_reload_path(os.path.join(os.path.dirname(__file__), *('..',) * 4))
 
 

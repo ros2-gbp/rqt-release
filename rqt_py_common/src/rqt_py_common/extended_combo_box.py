@@ -30,10 +30,7 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-try:
-    from python_qt_binding.QtCore import QSortFilterProxyModel  # Qt 5
-except ImportError:
-    from python_qt_binding.QtGui import QSortFilterProxyModel  # Qt 4
+from python_qt_binding.QtCore import QSortFilterProxyModel
 from python_qt_binding.QtCore import Qt, Signal, Slot
 from python_qt_binding.QtWidgets import QComboBox, QCompleter
 
@@ -42,20 +39,20 @@ class ExtendedComboBox(QComboBox):
     setItems = Signal(list)
 
     def __init__(self, parent=None):
-        super(ExtendedComboBox, self).__init__(parent)
+        super().__init__(parent)
 
-        self.setFocusPolicy(Qt.StrongFocus)
+        self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.setEditable(True)
 
         # add a filter model to filter matching items
         self.filter_model = QSortFilterProxyModel(self)
-        self.filter_model.setFilterCaseSensitivity(Qt.CaseInsensitive)
+        self.filter_model.setFilterCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
         self.filter_model.setSourceModel(self.model())
 
         # add a completer, which uses the filter model
         self.completer = QCompleter(self.filter_model, self)
         # always show all (filtered) completions
-        self.completer.setCompletionMode(QCompleter.UnfilteredPopupCompletion)
+        self.completer.setCompletionMode(QCompleter.CompletionMode.UnfilteredPopupCompletion)
         self.setCompleter(self.completer)
 
         # connect signals
@@ -71,7 +68,7 @@ class ExtendedComboBox(QComboBox):
 
     # on model change, update the models of the filter and completer as well
     def setModel(self, model):
-        super(ExtendedComboBox, self).setModel(model)
+        super().setModel(model)
         self.filter_model.setSourceModel(model)
         self.completer.setModel(self.filter_model)
 
@@ -79,7 +76,7 @@ class ExtendedComboBox(QComboBox):
     def setModelColumn(self, column):
         self.completer.setCompletionColumn(column)
         self.filter_model.setFilterKeyColumn(column)
-        super(ExtendedComboBox, self).setModelColumn(column)
+        super().setModelColumn(column)
 
     @Slot(list)
     def onSetItems(self, items):
@@ -106,4 +103,4 @@ if __name__ == '__main__':
     combo.resize(300, 40)
     combo.show()
 
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

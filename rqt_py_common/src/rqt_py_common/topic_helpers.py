@@ -49,13 +49,13 @@ def is_primitive_type(type_str):
         'string',
         'bool', 'boolean',
         # deprecated in ros1:
-        'char', 'byte']
+        'byte']
     return type_str in primitive_types
 
 
 def get_type_class(type_name):
     """
-    Gets the python type from an idl string.
+    Get the python type from an idl string.
 
     See: https://github.com/ros2/design/blob/gh-pages/articles/142_idl.md
 
@@ -117,13 +117,13 @@ def _get_field_type(topic_names_and_types, target):  # noqa: C901
             if tokenized_target == tokenized_topic_name:
                 # If there is more than one type of topic on target
                 if len(types) > 1:
-                    logger.warn(
-                        'Ambiguous request. Multiple topic types found on: {}'.format(target))
+                    logger.warning(
+                        f'Ambiguous request. Multiple topic types found on: {target}')
                     return None, False
                 # If the types array is empty then something weird has happend
                 if len(types) == 0:
-                    logger.warn(
-                        'No msg types found on: {}'.format(target))
+                    logger.warning(
+                        f'No msg types found on: {target}')
                     return None, False
 
                 # If there is only one msg type
@@ -145,7 +145,7 @@ def _get_field_type(topic_names_and_types, target):  # noqa: C901
                     except KeyError:
                         pass
 
-    logger.debug('faild to find field type: {}'.format(target))
+    logger.debug(f'faild to find field type: {target}')
     return None, False
 
 
