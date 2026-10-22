@@ -2,36 +2,18 @@
 Changelog for package rqt_gui_cpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.0.5 (2026-10-22)
-------------------
+1.10.7 (2026-10-22)
+-------------------
+* granular rclcpp includes (`#363 <https://github.com/ros-visualization/rqt/issues/363>`_) (`#364 <https://github.com/ros-visualization/rqt/issues/364>`_)
+* Contributors: mergify[bot]
 
-2.0.4 (2026-09-14)
-------------------
-* Removed Qt5 (`#369 <https://github.com/ros-visualization/rqt/issues/369>`_)
-* Contributors: Alejandro Hernández Cordero
+1.10.6 (2026-06-18)
+-------------------
 
-2.0.3 (2026-09-04)
-------------------
-* Removed Qt5 support (`#368 <https://github.com/ros-visualization/rqt/issues/368>`_)
-* granular rclcpp includes (`#363 <https://github.com/ros-visualization/rqt/issues/363>`_)
-* Contributors: Alejandro Hernández Cordero
-
-2.0.2 (2026-07-30)
-------------------
-* Added unit test for Plufin base class (`#362 <https://github.com/ros-visualization/rqt/issues/362>`_)
-* fix ROSspinThread shutdown data race and prune unloaded instances (`#361 <https://github.com/ros-visualization/rqt/issues/361>`_)
-* drop redundant instance\_ member (`#360 <https://github.com/ros-visualization/rqt/issues/360>`_)
-* Move implementation from hpp to cpp (`#359 <https://github.com/ros-visualization/rqt/issues/359>`_)
-* modernize to cpp20 (`#358 <https://github.com/ros-visualization/rqt/issues/358>`_)
-* Contributors: Alejandro Hernández Cordero
-
-2.0.1 (2026-06-18)
-------------------
-
-2.0.0 (2026-05-06)
-------------------
-* Cleanup headers (`#347 <https://github.com/ros-visualization/rqt/issues/347>`_)
-* Contributors: Alejandro Hernández Cordero
+1.10.5 (2026-05-06)
+-------------------
+* Cleanup headers (`#347 <https://github.com/ros-visualization/rqt/issues/347>`_) (`#350 <https://github.com/ros-visualization/rqt/issues/350>`_)
+* Contributors: mergify[bot]
 
 1.10.4 (2026-04-24)
 -------------------

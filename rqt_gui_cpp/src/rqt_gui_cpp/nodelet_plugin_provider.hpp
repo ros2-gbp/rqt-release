@@ -33,9 +33,7 @@
 #ifndef RQT_GUI_CPP__NODELET_PLUGIN_PROVIDER_HPP_
 #define RQT_GUI_CPP__NODELET_PLUGIN_PROVIDER_HPP_
 
-#include <QSet>
 #include <QThread>
-#include <atomic>
 #include <memory>
 #include <string>
 
@@ -44,8 +42,7 @@
 
 #include <rqt_gui_cpp/plugin.hpp>
 
-#include <rclcpp/executors/multi_threaded_executor.hpp>
-#include <rclcpp/node.hpp>
+#include <rclcpp/rclcpp.hpp>
 
 namespace rqt_gui_cpp
 {
@@ -56,22 +53,24 @@ class NodeletPluginProvider
 public:
   NodeletPluginProvider(const QString & export_tag, const QString & base_class_type);
 
-  ~NodeletPluginProvider() override;
+  virtual ~NodeletPluginProvider();
 
-  void unload(void * instance) override;
+  virtual void unload(void * instance);
 
 protected:
   void init_loader();
 
-  std::shared_ptr<Plugin> create_plugin(
+  virtual std::shared_ptr<Plugin> create_plugin(
     const std::string & lookup_name,
-    qt_gui_cpp::PluginContext * plugin_context) override;
+    qt_gui_cpp::PluginContext * plugin_context);
 
-  void init_plugin(
+  virtual void init_plugin(
     const QString & plugin_id, qt_gui_cpp::PluginContext * plugin_context,
-    qt_gui_cpp::Plugin * plugin) override;
+    qt_gui_cpp::Plugin * plugin);
 
-  QSet<void *> instances_;
+  std::shared_ptr<rqt_gui_cpp::Plugin> instance_;
+
+  QMap<void *, QString> instances_;
 
   bool loader_initialized_;
 
@@ -83,10 +82,10 @@ protected:
     : public QThread
   {
 public:
-    explicit RosSpinThread(QObject * parent = nullptr);
-    ~RosSpinThread() override;
-    void run() override;
-    std::atomic<bool> abort;
+    explicit RosSpinThread(QObject * parent = 0);
+    virtual ~RosSpinThread();
+    void run();
+    bool abort;
     // Create an executor that will be responsible for execution of callbacks for a set of nodes.
     // With this version, all callbacks will be called from within this thread (the main one).
     rclcpp::executors::MultiThreadedExecutor exec_;
