@@ -2,40 +2,14 @@
 Changelog for package rqt_py_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.10.7 (2026-10-22)
--------------------
+1.9.3 (2025-10-22)
+------------------
 
-1.10.6 (2026-06-18)
--------------------
-* Use logger.warning(), f-string , super() and Qt6 fixes (`#354 <https://github.com/ros-visualization/rqt/issues/354>`_) (`#356 <https://github.com/ros-visualization/rqt/issues/356>`_)
-* Removed dead code (`#349 <https://github.com/ros-visualization/rqt/issues/349>`_) (`#351 <https://github.com/ros-visualization/rqt/issues/351>`_)
-* Contributors: mergify[bot]
+1.9.2 (2025-10-17)
+------------------
 
-1.10.5 (2026-05-06)
--------------------
-* Cleanup headers (`#347 <https://github.com/ros-visualization/rqt/issues/347>`_) (`#350 <https://github.com/ros-visualization/rqt/issues/350>`_)
-* Contributors: mergify[bot]
-
-1.10.4 (2026-04-24)
--------------------
-* Use qt-base-dev / libqtwidgets (`#345 <https://github.com/ros-visualization/rqt/issues/345>`_)
-* Contributors: Shane Loretz
-
-1.10.3 (2026-04-13)
--------------------
-* Support Qt6 (`#339 <https://github.com/ros-visualization/rqt/issues/339>`_)
-* Contributors: Alejandro Hernández Cordero
-
-1.10.2 (2025-10-17)
--------------------
-
-1.10.1 (2025-10-09)
--------------------
-* fix compile with qt6 (`#321 <https://github.com/ros-visualization/rqt/issues/321>`_)
-* Contributors: mosfet80
-
-1.10.0 (2025-04-28)
--------------------
+1.9.1 (2025-10-09)
+------------------
 
 1.9.0 (2025-02-02)
 ------------------

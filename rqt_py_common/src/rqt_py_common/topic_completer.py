@@ -40,7 +40,7 @@ from rqt_py_common.tree_model_completer import TreeModelCompleter
 class TopicCompleter(TreeModelCompleter):
 
     def __init__(self, parent=None):
-        super().__init__(parent)
+        super(TopicCompleter, self).__init__(parent)
         self.setModel(MessageTreeModel())
 
     def splitPath(self, path):
@@ -59,12 +59,12 @@ class TopicCompleter(TreeModelCompleter):
                     subfield_topic = path.replace(topic, '')
                     # Remove backslash at the end of the topic name
                     result = [topic[1:]]
-                    result2 = super().splitPath(
+                    result2 = super(TopicCompleter, self).splitPath(
                         subfield_topic.replace('[', '/['))
                     result = result + result2
                     return result
 
-        return super().splitPath(path.replace('[', '/['))
+        return super(TopicCompleter, self).splitPath(path.replace('[', '/['))
 
     def update_topics(self, node):
         # Note: This has changed from ROS1->2 as ROS2 only allows nodes to query
@@ -80,10 +80,9 @@ class TopicCompleter(TreeModelCompleter):
                 topic_name = topic_path.strip('/')
                 message_class = get_message_class(topic_type)
                 if message_class is None:
-                    qWarning(
-                        'TopicCompleter.update_topics(): '
-                        f'could not get message class for topic type "{topic_type}" '
-                        f'on topic "{topic_path}"')
+                    qWarning('TopicCompleter.update_topics(): '
+                             'could not get message class for topic type "%s" on topic "%s"' %
+                             (topic_type, topic_path))
                     continue
                 message_instance = message_class()
                 self.model().add_message(message_instance, topic_name, topic_type, topic_path)
@@ -92,7 +91,7 @@ class TopicCompleter(TreeModelCompleter):
 if __name__ == '__main__':
     import sys
     from python_qt_binding.QtWidgets import \
-        QApplication, QComboBox, QCompleter, QLineEdit, QMainWindow, \
+        QApplication, QComboBox, QLineEdit, QMainWindow, \
         QTreeView, QVBoxLayout, QWidget
 
     import rclpy
@@ -110,7 +109,7 @@ if __name__ == '__main__':
             edit = QLineEdit()
             edit_completer = TopicCompleter(edit)
             edit_completer.update_topics(topic_completer_node)
-            edit_completer.setCompletionMode(QCompleter.CompletionMode.InlineCompletion)
+            # edit_completer.setCompletionMode(QCompleter.InlineCompletion)
             edit.setCompleter(edit_completer)
 
             combo = QComboBox()
@@ -118,7 +117,7 @@ if __name__ == '__main__':
             combo_completer = TopicCompleter(combo)
             combo_completer.update_topics(topic_completer_node)
 
-            combo_completer.setCompletionMode(QCompleter.CompletionMode.InlineCompletion)
+            # combo_completer.setCompletionMode(QCompleter.InlineCompletion)
             combo.lineEdit().setCompleter(combo_completer)
 
             model_tree = QTreeView()
@@ -144,6 +143,6 @@ if __name__ == '__main__':
             mw.move(300, 0)
             mw.resize(800, 900)
             mw.show()
-            app.exec()
+            app.exec_()
     except (KeyboardInterrupt, ExternalShutdownException):
         pass

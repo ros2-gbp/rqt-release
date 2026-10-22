@@ -31,7 +31,7 @@
 #
 # Author: Isaac Saito
 
-from python_qt_binding.QtGui import QColorConstants
+from python_qt_binding.QtCore import Qt
 from python_qt_binding.QtWidgets import QSpacerItem, QWidgetItem
 
 from rclpy import logging
@@ -41,8 +41,7 @@ class LayoutUtil(object):
     _logger = logging.get_logger('LayoutUtil')
 
     @staticmethod
-    def alternate_color(
-            list_widgets, colors_alter=(QColorConstants.White, QColorConstants.Gray)):
+    def alternate_color(list_widgets, colors_alter=[Qt.white, Qt.gray]):
         """
         Alternate the background color of the widgets.
 
@@ -67,7 +66,8 @@ class LayoutUtil(object):
             i_widget += 1
 
             LayoutUtil._logger.debug(
-                f'divisor={divisor} i_widget={i_widget} colors_num={colors_num}')
+                'divisor={} i_widget={} colors_num={}'.format(
+                    divisor, i_widget, colors_num))
 
             p.setColor(w.backgroundRole(), colors_alter[divisor])
             w.setPalette(p)

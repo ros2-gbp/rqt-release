@@ -67,6 +67,8 @@ void NodeletPluginProvider::unload(void * instance)
     return;
   }
 
+  QString nodelet_name = instances_[instance];
+
   qt_gui_cpp::RosPluginlibPluginProvider<rqt_gui_cpp::Plugin>::unload(instance);
 }
 

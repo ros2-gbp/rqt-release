@@ -28,7 +28,10 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-import builtins
+try:
+    import __builtin__
+except ImportError:
+    import builtins as __builtin__
 import os
 import sys
 import traceback
@@ -44,7 +47,7 @@ class RosPluginProvider(PluginProvider):
     """Base class for providing plugins based on the ROS package system."""
 
     def __init__(self, export_tag, base_class_type):
-        super().__init__()
+        super(RosPluginProvider, self).__init__()
         self.setObjectName('RosPluginProvider')
 
         self._export_tag = export_tag
@@ -74,30 +77,30 @@ class RosPluginProvider(PluginProvider):
         sys.path.append(os.path.join(attributes['plugin_path'], attributes['library_path']))
 
         try:
-            module = builtins.__import__(
+            module = __builtin__.__import__(
                 attributes['module_name'], fromlist=[attributes['class_from_class_type']], level=0)
         except NotImplementedError as e:
-            qCritical(f'RosPluginProvider.load({plugin_id}): raised an exception:\n{e}')
+            qCritical('RosPluginProvider.load(%s): raised an exception:\n%s' % (plugin_id, e))
             return None
         except Exception as e:
-            module_name = attributes['module_name']
-            class_from_class_type = attributes['class_from_class_type']
-            qCritical(
-                f'RosPluginProvider.load({plugin_id}) exception raised in '
-                f'builtins.__import__({module_name}, '
-                f'[{class_from_class_type}]):\n{traceback.format_exc()}')
+            qCritical('RosPluginProvider.load(%s) exception raised in '
+                      '__builtin__.__import__(%s, [%s]):\n%s' % (
+                          plugin_id, attributes['module_name'],
+                          attributes['class_from_class_type'],
+                          traceback.format_exc()))
             raise e
 
         class_ref = getattr(module, attributes['class_from_class_type'], None)
         if class_ref is None:
-            class_from_class_type = attributes['class_from_class_type']
-            qCritical(
-                f'RosPluginProvider.load({plugin_id}): could not find class '
-                f'"{class_from_class_type}" in module "{module}"')
+            qCritical('RosPluginProvider.load(%s): could not find class "%s" in module "%s"' %
+                      (plugin_id, attributes['class_from_class_type'], module))
             return None
 
         # create plugin provider instance without context
-        code = class_ref.__init__.__code__
+        try:
+            code = class_ref.__init__.func_code
+        except AttributeError:
+            code = class_ref.__init__.__code__
         if code.co_argcount == 1 and plugin_context is None:
             return class_ref()
         # create plugin instance
@@ -112,17 +115,15 @@ class RosPluginProvider(PluginProvider):
     def _parse_plugin_xml(self, package_name, plugin_xml):
         plugin_descriptors = []
         if not os.path.isfile(plugin_xml):
-            qCritical(
-                f'RosPluginProvider._parse_plugin_xml() plugin file "{plugin_xml}" '
-                f'in package "{package_name}" not found')
+            qCritical('RosPluginProvider._parse_plugin_xml() plugin file "%s" in package "%s" '
+                      'not found' % (plugin_xml, package_name))
             return plugin_descriptors
 
         try:
             root = ElementTree.parse(plugin_xml)
         except Exception:
-            qCritical(
-                f'RosPluginProvider._parse_plugin_xml() could not parse "{plugin_xml}" '
-                f'in package "{package_name}"')
+            qCritical('RosPluginProvider._parse_plugin_xml() could not parse "%s" in package "%s"'
+                      % (plugin_xml, package_name))
             return plugin_descriptors
         for library_el in root.iter('library'):
             library_path = library_el.attrib['path']

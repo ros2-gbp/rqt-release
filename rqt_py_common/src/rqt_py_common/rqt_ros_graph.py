@@ -31,6 +31,8 @@
 #
 # Author: Isaac Saito
 
+from __future__ import division
+
 from python_qt_binding.QtCore import Qt
 
 
@@ -118,7 +120,7 @@ class RqtRosGraph(object):
         while True:  # Loop per child.
             grn_curr = grn_prev + RqtRosGraph.DELIM_GRN + \
                 str(model_index.data())
-            child_qmindex = model_index.model().index(i_child, 0, model_index)
+            child_qmindex = model_index.child(i_child, 0)
 
             if (not child_qmindex.isValid()):
                 if i_child == 0:
@@ -140,9 +142,9 @@ class RqtRosGraph(object):
 
     @staticmethod
     def get_upper_grn(model_index, str_grn):
-        if model_index.data(Qt.ItemDataRole.DisplayRole) is None:
+        if model_index.data(Qt.DisplayRole) is None:
             return str_grn
         str_grn = (RqtRosGraph.DELIM_GRN +
-                   str(model_index.data(Qt.ItemDataRole.DisplayRole)) +
+                   str(model_index.data(Qt.DisplayRole)) +
                    str_grn)
         return RqtRosGraph.get_upper_grn(model_index.parent(), str_grn)
